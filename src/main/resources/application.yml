@@ -1,0 +1,32 @@
+server:
+  port: 8020
+eureka:
+  client:
+    service-url:
+      defaultZone: http://ralap:hjx969190@www.itfan01.top:8761/eureka/,http://ralap:hjx969190@www.itfan02.top:8762/eureka/
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: itfan-kernel
+  zipkin:
+    base-url: http://localhost:8901
+  redis:
+    host: www.itfan.top
+    port: 6379
+    password: Hjx969190
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+management:
+  security:
+    enabled: false
+logging:
+  level:
+    org.springframework.web: debug
+feign:
+  hystrix:
+    enabled: true

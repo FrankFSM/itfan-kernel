@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+  <!-- Site Properties -->
+  <title>FAN_VIDEO</title>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <link href="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.css" rel="stylesheet"/>
+  <script src="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.js"></script>
+  <link href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.css" rel="stylesheet"/>
+  <script src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.js"></script>
+  <link href="/css/fan.css" rel="stylesheet"/>
+  <script src="/js/siderbar.js"></script>
+
+
+
+</head>
+
+<body>
+
+<div th:replace="header :: fmenu"></div>
+
+<div th:replace="header :: smenu"></div>
+
+<div class="pusher" style="background: aliceblue">
+  <div th:replace="header :: pmenu"></div>
+
+  <!--carousel start-->
+  <div class="swiper-container gallery-top">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" th:each="carousel : ${carouselList}">
+
+          <a th:href="@{/play(u=${carousel.rawUrl})}">
+            <img th:src="${carousel.imageUrl}"/>
+          </a>
+
+      </div>
+    </div>
+
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+  <!--carousel ent-->
+
+  <div class="ui hidden divider"></div>
+  <div class="ui container">
+
+    <!--video start-->
+    <div class="row relative">
+      <h2 class="ui header dividing black" id="videoTitle">
+        <span>电影</span>
+      </h2>
+    </div>
+    <div class="ui five column padded doubling grid">
+
+
+      <div th:class="${iterStat.index} &lt; 10 ? 'column videoItem' : 'videoItem'"
+           th:each="movie, iterStat:${moviesList}">
+        <div class="ui fluid link card" th:if="${iterStat.index} &lt; 10">
+          <div class="image">
+            <a class="image videoUrl" th:href="@{/play(u=${movie.realUrl})}">
+
+              <img th:src="${movie.imageUrl}" alt="" class="videoImage" style="width: 100%;"/></a>
+          </div>
+          <div class="content">
+            <div class="header"><font><font class="text-oneLine"
+                                            th:text="${movie.title}"></font></font></div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <!--movie end-->
+
+    <!--hotTv start-->
+    <div class="ui hidden divider"></div>
+    <div class="row relative">
+      <h2 class="ui header dividing black" id="videoTitle">
+        <span>热门电视剧</span>
+      </h2>
+    </div>
+    <div class="ui five column padded doubling grid">
+
+      <div th:class="${iterStat.index} &lt; 10 ? 'column videoItem' : 'videoItem'"
+           th:each="hotTV, iterStat:${hotTVList}">
+        <div class="ui fluid link card" th:if="${iterStat.index} &lt; 10">
+          <div class="image">
+            <a class="image videoUrl" th:href="@{/play(u=${hotTV.realUrl})}">
+
+              <img th:src="${hotTV.imageUrl}" alt="" class="videoImage" style="width: 100%;"/></a>
+          </div>
+          <div class="content">
+            <div class="header"><font><font class="text-oneLine"
+                                            th:text="${hotTV.title}"></font></font></div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <!--hotTv end-->
+
+    <!--zy start-->
+    <div class="ui hidden divider"></div>
+    <div class="row relative">
+      <h2 class="ui header dividing black" id="videoTitle">
+        <span>综艺</span>
+      </h2>
+    </div>
+    <div class="ui five column padded doubling grid">
+
+      <div th:class="${iterStat.index} &lt; 10 ? 'column videoItem' : 'videoItem'"
+           th:each="zy, iterStat:${zyList}">
+        <div class="ui fluid link card" th:if="${iterStat.index} &lt; 10">
+          <div class="image">
+            <a class="image videoUrl" th:href="@{/play(u=${zy.realUrl})}">
+
+              <img th:src="${zy.imageUrl}" alt="" class="videoImage" style="width: 100%;"/></a>
+          </div>
+          <div class="content">
+            <div class="header"><font><font class="text-oneLine"
+                                            th:text="${zy.title}"></font></font></div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <!--zy end-->
+  </div>
+</div>
+
+<script>
+  //  swiper 轮播图
+  var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+    paginationClickable: true,
+    spaceBetween: 50,
+    centeredSlides: true,
+    autoplay: 3000,
+    autoplayDisableOnInteraction: false,
+    loop: true
+  });
+</script>
+
+
+</body>
+
+</html>
